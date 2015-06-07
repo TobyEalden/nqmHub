@@ -1,0 +1,10 @@
+{
+  "hubDb": {
+    "type": "mongodb",
+    "connection": "mongodb://localhost:27017/liveFeeds"
+  },
+  "httpListener": {
+    "port": 3102,
+    "maxRequestLength": 250000
+  }
+}
