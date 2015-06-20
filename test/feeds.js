@@ -9,7 +9,7 @@ var config = {
 };
 
 var Repository = require("sourced-repo-mongo").Repository;
-var Feed = require("../lib/domain/feed");
+var Feed = require("../lib/command/domain/feed");
 var eventBus = require("../lib/eventBus").EventBus;
 var sourcedRepoMongo;
 var cbCalled = false;

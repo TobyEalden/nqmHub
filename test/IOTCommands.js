@@ -9,8 +9,8 @@ var config = {
 };
 
 var eventBus = require("../lib/eventBus").EventBus;
-var Factory = require("../lib/commandHandlerFactory").Factory;
-var Command = require("../lib/command").Command;
+var Factory = require("../lib/command/commandHandlerFactory").Factory;
+var Command = require("../lib/command/command").Command;
 var sourcedRepoMongo;
 var cbCalled = false;
 var db;
