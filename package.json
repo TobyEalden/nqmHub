@@ -10,6 +10,8 @@
   "license": "BSD-2-Clause",
   "dependencies": {
     "scribe-js": "~2.0.4",
-    "mongodb": "~2.0.33"
+    "mongodb": "~2.0.33",
+    "eventemitter2": "~0.4.14",
+    "lodash": "~3.9.3"
   }
 }
