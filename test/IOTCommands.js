@@ -8,7 +8,7 @@ var config = {
   MONGO_URL: "mongodb://localhost:27017/nqmHubTests"
 };
 
-var eventBus = require("../lib/eventBus").EventBus;
+var eventBus = require("../lib/events/eventBus").EventBus;
 var Factory = require("../lib/command/commandHandlerFactory").Factory;
 var Command = require("../lib/command/command").Command;
 var sourcedRepoMongo;

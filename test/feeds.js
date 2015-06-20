@@ -10,7 +10,7 @@ var config = {
 
 var Repository = require("sourced-repo-mongo").Repository;
 var Feed = require("../lib/command/domain/feed");
-var eventBus = require("../lib/eventBus").EventBus;
+var eventBus = require("../lib/events/eventBus").EventBus;
 var sourcedRepoMongo;
 var cbCalled = false;
 var db;

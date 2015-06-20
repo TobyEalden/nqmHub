@@ -1,7 +1,7 @@
 {
-  "hubDb": {
-    "type": "mongodb",
-    "connection": "mongodb://localhost:27017/nqmHub"
+  "db": {
+    "command": "mongodb://localhost:27017/nqmHub",
+    "query": "mongodb://localhost:27017/nqmHubUI"
   },
   "httpListener": {
     "port": 3102,

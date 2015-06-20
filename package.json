@@ -12,6 +12,7 @@
     "scribe-js": "~2.0.4",
     "mongodb": "~2.0.33",
     "eventemitter2": "~0.4.14",
-    "lodash": "~3.9.3"
+    "lodash": "~3.9.3",
+    "debug": "~2.2.0"
   }
 }
