@@ -11,7 +11,7 @@ var config = {
 var eventBus = require("../lib/events/eventBus").EventBus;
 var Factory = require("../lib/command/commandHandlerFactory").Factory;
 var Command = require("../lib/command/command").Command;
-var sourcedRepoMongo;
+var dbs = require("../lib/mongoConnectionFactory");
 var cbCalled = false;
 var db;
 var cmdHandler;
@@ -27,17 +27,15 @@ var initDB = function() {
 };
 
 exports.setUp = function(cb) {
-  if (!sourcedRepoMongo) {
-    sourcedRepoMongo = require("sourced-repo-mongo/mongo");
-    sourcedRepoMongo.on("connected", function(connectedDb) {
-      if (!cbCalled) {
+  if (!db) {
+    dbs.commandDb.start(config.MONGO_URL, function(err) {
+      if (!err && !cbCalled) {
         cbCalled = true;
-        db = connectedDb;
+        db = dbs.commandDb.db();
         initDB();
         cb();
       }
     });
-    sourcedRepoMongo.connect(config.MONGO_URL);
   } else {
     initDB();
     cb();

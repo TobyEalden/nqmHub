@@ -8,24 +8,22 @@ var config = {
   MONGO_URL: "mongodb://localhost:27017/nqmHubTests"
 };
 
-var Repository = require("sourced-repo-mongo").Repository;
+var Repository = require("../lib/events/eventRepository").Repository;
 var Feed = require("../lib/command/domain/feed");
 var eventBus = require("../lib/events/eventBus").EventBus;
-var sourcedRepoMongo;
+var dbs = require("../lib/mongoConnectionFactory");
 var cbCalled = false;
 var db;
 
 exports.setUp = function(cb) {
-  if (!sourcedRepoMongo) {
-    sourcedRepoMongo = require("sourced-repo-mongo/mongo");
-    sourcedRepoMongo.on("connected", function(connectedDb) {
-      if (!cbCalled) {
+  if (!db) {
+    dbs.commandDb.start(config.MONGO_URL, function(err) {
+      if (!err && !cbCalled) {
         cbCalled = true;
-        db = connectedDb;
+        db = dbs.commandDb.db();
         cb();
       }
     });
-    sourcedRepoMongo.connect(config.MONGO_URL);
   } else {
     cb();
   }
