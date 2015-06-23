@@ -49,7 +49,7 @@ exports.createFeed = function(test) {
 };
 
 exports.snapshot = function(test) {
-  test.expect(6);
+  test.expect(5);
 
   db.collection("Feed.events").drop();
   db.collection("Feed.snapshots").drop();
@@ -59,26 +59,25 @@ exports.snapshot = function(test) {
 
   eventBus.on("Feed.created",function(ev,ent) {
     test.ok(this.event === "Feed.created");
-    test.ok(ent.id === "feed123");
-    test.ok(ent.constructor.name === "Feed");
+    test.ok(ev.id === "feed123");
   });
 
   feed.create({ hubId: "hub123", id: "feed123", name: "feedName", schema: [ {name: "timestamp", units: "time" }, { name: "temperature", units: "celsius" } ]});
-  feed.rename("hello1");
-  feed.rename("hello2");
-  feed.rename("hello3");
-  feed.rename("hello4");
-  feed.rename("hello5");
-  feed.rename("hello6");
-  feed.rename("hello7");
-  feed.rename("hello8");
+  feed.rename({ name: "hello1" });
+  feed.rename({ name: "hello2" });
+  feed.rename({ name: "hello3" });
+  feed.rename({ name: "hello4" });
+  feed.rename({ name: "hello5" });
+  feed.rename({ name: "hello6" });
+  feed.rename({ name: "hello7" });
+  feed.rename({ name: "hello8" });
 
   repo.commit(feed, function(err) {
     test.ok(!err,"feed committed without errors");
 
-    feed.rename("hello9");
-    feed.rename("hello10");
-    feed.rename("hello11");
+    feed.rename({ name: "hello9" });
+    feed.rename({ name: "hello10" });
+    feed.rename({ name: "hello11" });
 
     repo.commit(feed, function(err) {
       test.ok(!err, "feed committed without errors");
@@ -92,15 +91,14 @@ exports.snapshot = function(test) {
 };
 
 exports.eventBus = function(test) {
-  test.expect(4);
+  test.expect(3);
 
   db.collection("Feed.events").drop();
   db.collection("Feed.snapshots").drop();
 
-  eventBus.onAny(function(event, ent) {
+  eventBus.onAny(function(event) {
     test.ok(this.event === "Feed.created", "created event received");
     test.ok(event, "have an event");
-    test.ok(ent, "have an entity");
   });
 
   var repo = new Repository(Feed, {}, eventBus);
