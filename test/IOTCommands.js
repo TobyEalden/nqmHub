@@ -116,7 +116,7 @@ exports.feedData = function(test) {
     cmdHandler.execute(cmd).then(function(err) {
       test.ok(true, "created feed");
 
-      cmd = new Command("iot/feed/data", { hubId: "testHub", payload: [ { feedId: "testFeed", timestamp: 1234, temperature: 23.2 }, { feedId: "testFeed", timestamp: 1234, temperature: 21.2 }, { feedId: "testFeed", timestamp: 1234, temperature: 20.2 }  ] });
+      cmd = new Command("iot/feed/data", { hubId: "testHub", payload: [ { feedId: "testFeed", payload: { timestamp: 1234, temperature: 23.2} }, { feedId: "testFeed", payload: { timestamp: 1234, temperature: 21.2 }}, { feedId: "testFeed", payload: { timestamp: 1234, temperature: 20.2 }}  ] });
       cmdHandler.execute(cmd).then(function(err) {
         test.ok(true, "feedData");
         test.done();

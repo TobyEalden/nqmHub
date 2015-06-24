@@ -83,7 +83,7 @@ exports.snapshot = function(test) {
       test.ok(true, "feed committed without errors");
 
       repo.get(["hub123","feed123"]).then(function(feed) {
-        test.ok(feed.version == 12, "feed version is correct");
+        test.ok(feed.__version == 12, "feed version is correct");
         test.done();
       });
     });
