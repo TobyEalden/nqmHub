@@ -17,8 +17,8 @@ var db;
 
 exports.setUp = function(cb) {
   if (!db) {
-    dbs.commandDb.start(config.MONGO_URL, function(err) {
-      if (!err && !cbCalled) {
+    dbs.commandDb.start(config.MONGO_URL).then(function() {
+      if (!cbCalled) {
         cbCalled = true;
         db = dbs.commandDb.db();
         cb();
@@ -42,8 +42,8 @@ exports.createFeed = function(test) {
 
   feed.create({ hubId: "hub123", id: "feed123", name: "feedName", schema: [ {name: "timestamp", units: "time" }, { name: "temperature", units: "celsius" } ]});
 
-  repo.commit(feed, function(err) {
-    test.ok(!err,"feed committed without errors");
+  repo.commit(feed).then(function() {
+    test.ok(true,"feed committed without errors");
     test.done();
   });
 };
@@ -72,17 +72,17 @@ exports.snapshot = function(test) {
   feed.rename({ name: "hello7" });
   feed.rename({ name: "hello8" });
 
-  repo.commit(feed, function(err) {
-    test.ok(!err,"feed committed without errors");
+  repo.commit(feed).then(function() {
+    test.ok(true,"feed committed without errors");
 
     feed.rename({ name: "hello9" });
     feed.rename({ name: "hello10" });
     feed.rename({ name: "hello11" });
 
-    repo.commit(feed, function(err) {
-      test.ok(!err, "feed committed without errors");
+    repo.commit(feed).then(function() {
+      test.ok(true, "feed committed without errors");
 
-      repo.get("feed123", function(err, feed) {
+      repo.get("feed123").then(function(feed) {
         test.ok(feed.version == 12, "feed version is correct");
         test.done();
       });
@@ -105,8 +105,8 @@ exports.eventBus = function(test) {
   var feed = repo.factory();
   feed.create({ hubId: "hub123", id: "feed123", name: "feedName", schema: [ {name: "timestamp", units: "time" }, { name: "temperature", units: "celsius" } ]});
 
-  repo.commit(feed, function(err) {
-    test.ok(!err,"feed committed without errors");
+  repo.commit(feed).then(function() {
+    test.ok(true,"feed committed without errors");
     test.done();
   });
 };
