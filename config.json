@@ -4,10 +4,10 @@
     "query": "mongodb://localhost:27017/nqmHubUIT1"
   },
   "httpCommandListener": {
-    "port": 3102,
+    "port": 3103,
     "maxRequestLength": 250000
   },
   "httpQueryListener": {
-    "port": 3103
+    "port": 3102
   }
 }

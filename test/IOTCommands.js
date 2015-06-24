@@ -49,7 +49,7 @@ exports.tearDown = function(cb) {
 exports.createHub = function(test) {
   test.expect(1);
 
-  var cmd = new Command("iot.createHub", { id: "testHub", name: "my first hub", owner: "xyz" });
+  var cmd = new Command("iot/hub/create", { id: "testHub", name: "my first hub", owner: "xyz" });
   cmdHandler.execute(cmd).then(function() {
     test.ok(true, "command completed");
     test.done();
@@ -59,7 +59,7 @@ exports.createHub = function(test) {
 exports.createFeedNoHub = function(test) {
   test.expect(1);
 
-  var cmd = new Command("iot.createFeed", { id: "testFeed", hubId: "testHub", name: "my first feed" });
+  var cmd = new Command("iot/feed/create", { id: "testFeed", hubId: "testHub", name: "my first feed" });
   cmdHandler.execute(cmd).then(null, function(err) {
     test.ok(err, "failed to create feed with missing hub");
     test.done();
@@ -69,11 +69,11 @@ exports.createFeedNoHub = function(test) {
 exports.createFeed = function(test) {
   test.expect(2);
 
-  var cmd = new Command("iot.createHub", { id: "testHub", name: "my first hub", owner: "xyz" });
+  var cmd = new Command("iot/hub/create", { id: "testHub", name: "my first hub", owner: "xyz" });
   cmdHandler.execute(cmd).then(function() {
     test.ok(true, "hub command completed");
 
-    cmd = new Command("iot.createFeed", { id: "testFeed", hubId: "testHub", name: "my first feed" });
+    cmd = new Command("iot/feed/create", { id: "testFeed", hubId: "testHub", name: "my first feed" });
     cmdHandler.execute(cmd).then(function() {
       test.ok(true, "created feed");
       test.done();
@@ -84,15 +84,15 @@ exports.createFeed = function(test) {
 exports.renameFeed = function(test) {
   test.expect(3);
 
-  var cmd = new Command("iot.createHub", { id: "testHub", name: "my first hub", owner: "xyz" });
+  var cmd = new Command("iot/hub/create", { id: "testHub", name: "my first hub", owner: "xyz" });
   cmdHandler.execute(cmd).then(function() {
     test.ok(true, "hub command completed");
 
-    cmd = new Command("iot.createFeed", { id: "testFeed", hubId: "testHub", name: "my first feed" });
+    cmd = new Command("iot/feed/create", { id: "testFeed", hubId: "testHub", name: "my first feed" });
     cmdHandler.execute(cmd).then(function() {
       test.ok(true, "created feed");
 
-      cmd = new Command("iot.renameFeed", { id: "testFeed", hubId: "testHub", name: "!!!ARSE!!!" });
+      cmd = new Command("iot/feed/rename", { id: "testFeed", hubId: "testHub", name: "!!!ARSE!!!" });
       cmdHandler.execute(cmd).then(function() {
         test.ok(true, "renamed feed");
         test.done();
@@ -108,15 +108,15 @@ exports.feedData = function(test) {
     console.log(this.event);
   });
 
-  var cmd = new Command("iot.createHub", { id: "testHub", name: "my first hub", owner: "xyz" });
+  var cmd = new Command("iot/hub/create", { id: "testHub", name: "my first hub", owner: "xyz" });
   cmdHandler.execute(cmd).then(function(err) {
     test.ok(true, "hub command completed");
 
-    cmd = new Command("iot.createFeed", { id: "testFeed", hubId: "testHub", name: "my first feed" });
+    cmd = new Command("iot/feed/create", { id: "testFeed", hubId: "testHub", name: "my first feed" });
     cmdHandler.execute(cmd).then(function(err) {
       test.ok(true, "created feed");
 
-      cmd = new Command("iot.feedData", { hubId: "testHub", payload: [ { id: "testFeed", timestamp: 1234, temperature: 23.2 }, { id: "testFeed", timestamp: 1234, temperature: 21.2 }, { id: "testFeed", timestamp: 1234, temperature: 20.2 }  ] });
+      cmd = new Command("iot/feed/data", { hubId: "testHub", payload: [ { id: "testFeed", timestamp: 1234, temperature: 23.2 }, { id: "testFeed", timestamp: 1234, temperature: 21.2 }, { id: "testFeed", timestamp: 1234, temperature: 20.2 }  ] });
       cmdHandler.execute(cmd).then(function(err) {
         test.ok(true, "feedData");
         test.done();
