@@ -37,7 +37,7 @@ exports.createFeed = function(test) {
   test.expect(1);
 
   db.collection("Feed.events").drop();
-  var repo = new Repository(Feed, {}, eventBus);
+  var repo = new Repository(Feed);
   var feed = repo.factory();
 
   feed.create({ hubId: "hub123", id: "feed123", name: "feedName", schema: [ {name: "timestamp", units: "time" }, { name: "temperature", units: "celsius" } ]});
@@ -54,7 +54,7 @@ exports.snapshot = function(test) {
   db.collection("Feed.events").drop();
   db.collection("Feed.snapshots").drop();
 
-  var repo = new Repository(Feed, {}, eventBus);
+  var repo = new Repository(Feed);
   var feed = repo.factory();
 
   eventBus.on("Feed.created",function(ev,ent) {
@@ -82,7 +82,7 @@ exports.snapshot = function(test) {
     repo.commit(feed).then(function() {
       test.ok(true, "feed committed without errors");
 
-      repo.get("feed123").then(function(feed) {
+      repo.get(["hub123","feed123"]).then(function(feed) {
         test.ok(feed.version == 12, "feed version is correct");
         test.done();
       });
@@ -101,7 +101,7 @@ exports.eventBus = function(test) {
     test.ok(event, "have an event");
   });
 
-  var repo = new Repository(Feed, {}, eventBus);
+  var repo = new Repository(Feed);
   var feed = repo.factory();
   feed.create({ hubId: "hub123", id: "feed123", name: "feedName", schema: [ {name: "timestamp", units: "time" }, { name: "temperature", units: "celsius" } ]});
 

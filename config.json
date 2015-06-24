@@ -1,7 +1,7 @@
 {
   "db": {
-    "command": "mongodb://localhost:27017/nqmHubT1",
-    "query": "mongodb://localhost:27017/nqmHubUIT1"
+    "command": "mongodb://localhost:27017/nqmHub",
+    "query": "mongodb://localhost:27017/nqmHub"
   },
   "httpCommandListener": {
     "port": 3103,
