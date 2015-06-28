@@ -9,11 +9,12 @@
   "author": "toby.ealden@gmail.com",
   "license": "BSD-2-Clause",
   "dependencies": {
-    "mongodb": "~2.0.33",
+    "bluebird": "~2.9.30",
+    "debug": "~2.2.0",
     "eventemitter2": "~0.4.14",
     "lodash": "~3.9.3",
-    "debug": "~2.2.0",
+    "mongodb": "~2.0.33",
     "restify": "~3.0.3",
-    "bluebird": "~2.9.30"
+    "split": "^1.0.0"
   }
 }
