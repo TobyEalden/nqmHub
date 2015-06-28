@@ -9,5 +9,8 @@
   },
   "httpQueryListener": {
     "port": 3102
+  },
+  "eventBus": {
+    "port": 2022
   }
 }
