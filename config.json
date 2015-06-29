@@ -1,14 +1,10 @@
 {
   "db": {
-    "command": "mongodb://localhost:27017/nqmHub",
-    "query": "mongodb://localhost:27017/nqmHub"
+    "eventStore": "mongodb://localhost:27017/nqmHub"
   },
   "httpCommandListener": {
-    "port": 3103,
+    "port": 3102,
     "maxRequestLength": 250000
-  },
-  "httpQueryListener": {
-    "port": 3102
   },
   "eventBus": {
     "port": 2022

@@ -17,10 +17,10 @@ var db;
 
 exports.setUp = function(cb) {
   if (!db) {
-    dbs.commandDb.start(config.MONGO_URL).then(function() {
+    dbs.eventStore.start(config.MONGO_URL).then(function() {
       if (!cbCalled) {
         cbCalled = true;
-        db = dbs.commandDb.db();
+        db = dbs.eventStore.db();
         cb();
       }
     });
