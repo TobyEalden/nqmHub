@@ -15,6 +15,7 @@
     "json-pointer": "^0.3.0",
     "lodash": "~3.9.3",
     "mongodb": "~2.0.33",
+    "nqmCapability": "git://github.com/nqminds/nqmCapability.git",
     "restify": "~3.0.3",
     "split": "^1.0.0"
   },
